@@ -51,7 +51,7 @@ fun MyBankTheme(
 
     MaterialTheme(
       colorScheme = colorScheme,
-      typography = Typography,
+      typography = MyBankTypographyNormal,
       content = content
     )
 }

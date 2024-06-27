@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.mybank.core.navigation.ScreenRoutes
-import com.example.mybank.presentation.auth.LoginScreen
+import com.example.mybank.presentation.auth.login.LoginScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
