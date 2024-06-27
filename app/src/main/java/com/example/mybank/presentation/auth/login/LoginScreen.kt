@@ -15,6 +15,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,22 +29,33 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.mybank.R
 import com.example.mybank.core.navigation.ScreenRoutes
 import com.example.mybank.core.ui.components.MyBankCustomButton
 import com.example.mybank.presentation.auth.components.MyBankPasswordTextField
 import com.example.mybank.presentation.auth.components.MyBankTextField
+import dagger.hilt.android.lifecycle.HiltViewModel
+
 
 @Composable
 fun LoginScreen(
     navController: NavController,
-
+    viewModel: LoginViewModel = hiltViewModel()
     ) {
+    val uiState = viewModel.state.collectAsStateWithLifecycle()
+
     LoginScreenChild(
+        uiState = uiState,
         navToRegisterScreen = {
             navController.navigate(ScreenRoutes.RegisterScreen.route)
-        }
+        },
+        onEmailTextChange = viewModel::onEmailTextChange,
+        onPasswordTextChange = viewModel::onPasswordTextChange,
+        onLoginClick = viewModel::validateUserCredentials
+
     )
 }
 
@@ -48,12 +63,13 @@ fun LoginScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun LoginScreenChild(
-    emailText: String = "",
-    onEmailTextChange: (String) -> Unit = {},
-    passwordText: String = "",
-    onPasswordTextChange: (String) -> Unit = {},
-    navToRegisterScreen: () -> Unit = {},
+    uiState: State<LoginUiState>,
+    onEmailTextChange: (String) -> Unit,
+    onPasswordTextChange: (String) -> Unit,
+    navToRegisterScreen: () -> Unit,
+    onLoginClick: () -> Unit
 ) {
+
 
     Box(
         modifier = Modifier
@@ -84,7 +100,7 @@ private fun LoginScreenChild(
             Modifier
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(0.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.login_image),
@@ -92,22 +108,27 @@ private fun LoginScreenChild(
                 modifier = Modifier
                     .size(270.dp)
             )
+            Spacer(modifier = Modifier.height(10.dp))
             MyBankTextField(
-                text = emailText,
+                text = uiState.value.email,
                 onValueChange = onEmailTextChange,
-                label = "Email"
+                label = "Email",
+                isError = uiState.value.isError,
             )
             MyBankPasswordTextField(
-                password = passwordText,
+                password = uiState.value.password,
                 onPasswordChange = onPasswordTextChange,
+                isError = uiState.value.isError,
+                supportingText = "Please enter a valid password"
             )
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(50.dp))
             MyBankCustomButton(
                 onClick = {
-                    /*TODO*/
+                    onLoginClick()
                 },
                 text = "Login",
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Row(
                 Modifier
                     .padding(vertical = 5.dp),
@@ -131,11 +152,4 @@ private fun LoginScreenChild(
 
         }
     }
-}
-
-
-@Preview
-@Composable
-private fun LoginScreenPrev() {
-    LoginScreenChild()
 }

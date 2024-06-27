@@ -20,6 +20,7 @@ fun MyBankTextField(
     text: String,
     label: String,
     onValueChange: (String) -> Unit,
+    isError: Boolean = false,
 ) {
     OutlinedTextField(
         value = text,
@@ -31,7 +32,7 @@ fun MyBankTextField(
             cursorColor = Color(0xFF0E4259),
             focusedLabelColor = Color(0xFF356C84),
 
-        ),
+            ),
         shape = RoundedCornerShape(20.dp),
         modifier = modifier
             .fillMaxWidth(),
@@ -41,6 +42,16 @@ fun MyBankTextField(
                 color = Color.Gray,
                 fontSize = 16.sp
             )
+        },
+        isError = isError,
+        supportingText = {
+            if (isError) {
+                Text(
+                    text = "Please enter a valid email address",
+                    color = Color.Red,
+                    fontSize = 12.sp
+                )
+            }
         }
     )
 
