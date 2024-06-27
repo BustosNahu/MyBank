@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "90259423312",
+    "project_id": "mybank-c6a86",
+    "storage_bucket": "mybank-c6a86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90259423312:android:e09e835f00d7165f601155",
+        "android_client_info": {
+          "package_name": "com.example.mybank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfAWiwudmnmNusOTUgNf6rp4o_p8FStBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

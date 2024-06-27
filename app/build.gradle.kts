@@ -1,11 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.gms.google.services)
+    id("kotlin-kapt")
+    alias(libs.plugins.google.dagger.hilt)
 }
 
 android {
     namespace = "com.example.mybank"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.example.mybank"
@@ -39,8 +43,9 @@ android {
     buildFeatures {
         compose = true
     }
+
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources {
@@ -49,7 +54,19 @@ android {
     }
 }
 
+
 dependencies {
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation("com.google.firebase:firebase-auth")
+    implementation ("com.google.firebase:firebase-storage")
+
+    //Dependency Injection Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    implementation(libs.androidx.navigation.compose)
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -66,4 +83,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+kapt {
+    correctErrorTypes = true
 }
