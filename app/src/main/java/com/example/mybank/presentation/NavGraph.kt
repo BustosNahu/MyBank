@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.mybank.core.navigation.ScreenRoutes
 import com.example.mybank.presentation.auth.login.LoginScreen
+import com.example.mybank.presentation.auth.register.RegisterScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -18,13 +19,13 @@ fun NavGraph(navController: NavHostController) {
             slideInHorizontally(tween(700)) { 1090 }
         },
         exitTransition = {
-            slideOutHorizontally(tween(700)) { - 1090 }
+            slideOutHorizontally(tween(700)) { 1090 }
         },
         popEnterTransition = {
             slideInHorizontally(tween(700)) { 1090 }
         },
         popExitTransition = {
-            slideOutHorizontally(tween(700)) { - 1090 }
+            slideOutHorizontally(tween(700)) { 1090 }
         },
         ){
         // Auth
@@ -32,7 +33,7 @@ fun NavGraph(navController: NavHostController) {
             LoginScreen(navController = navController)
         }
         composable(route = ScreenRoutes.RegisterScreen.route){
-//            RegisterScreen(navController = navController)
+            RegisterScreen(navController = navController)
         }
 
         // Home

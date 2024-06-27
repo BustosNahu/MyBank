@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 fun MyBankTextField(
     modifier: Modifier = Modifier,
     text: String,
+    label: String,
     onValueChange: (String) -> Unit,
 ) {
     OutlinedTextField(
@@ -36,7 +37,7 @@ fun MyBankTextField(
             .fillMaxWidth(),
         label = {
             Text(
-                text = "Email",
+                text = label,
                 color = Color.Gray,
                 fontSize = 16.sp
             )

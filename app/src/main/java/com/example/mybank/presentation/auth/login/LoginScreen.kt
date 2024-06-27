@@ -95,6 +95,7 @@ private fun LoginScreenChild(
             MyBankTextField(
                 text = emailText,
                 onValueChange = onEmailTextChange,
+                label = "Email"
             )
             MyBankPasswordTextField(
                 password = passwordText,
@@ -106,7 +107,6 @@ private fun LoginScreenChild(
                     /*TODO*/
                 },
                 text = "Login",
-                modifier = Modifier.padding(horizontal = 16.dp),
             )
             Row(
                 Modifier
