@@ -10,11 +10,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.mybank.R
 import com.example.mybank.core.navigation.ScreenRoutes
@@ -26,14 +29,16 @@ import com.example.mybank.presentation.auth.components.MyBankTextField
 @Composable
 fun RegisterScreen(
     navController: NavController,
+    viewModel: RegisterViewModel = hiltViewModel()
 ) {
+    val uiState = viewModel.state.collectAsStateWithLifecycle()
     RegisterScreenChild(
-        onNameTextChange = {
-
-        },
+        uiState = uiState,
         navToLoginScreen = {
             navController.popBackStack()
-        }
+        },
+        onEvents = viewModel::handleEvents
+
     )
 
 }
@@ -41,8 +46,9 @@ fun RegisterScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun RegisterScreenChild(
-    onNameTextChange: (String) -> Unit,
+    uiState: State<RegisterUiState>,
     navToLoginScreen: () -> Unit,
+    onEvents: (RegisterEvents) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -67,34 +73,34 @@ private fun RegisterScreenChild(
                     contentDescription = null,
                 )
                 MyBankTextField(
-                    text = "",
-                    onValueChange = onNameTextChange,
-                    label = "Name"
+                    text = uiState.value.name,
+                    onValueChange = { onEvents(RegisterEvents.OnNameTextChange(it)) },
+                    label = "Name",
+                    isError = uiState.value.isError,
+                    supportingText = "This field is required"
                 )
                 MyBankTextField(
-                    text = "",
+                    text = uiState.value.surname,
                     label = "Surname",
-                    onValueChange = {
-
-                    }
+                    onValueChange = { onEvents(RegisterEvents.OnSurnameTextChange(it)) },
+                    isError = uiState.value.isError,
+                    supportingText = "This field is required"
                 )
                 MyBankTextField(
-                    text = "",
+                    text = uiState.value.email,
                     label = "Email",
-                    onValueChange = {
-
-                    }
+                    onValueChange = { onEvents(RegisterEvents.OnEmailTextChange(it))},
+                    isError = uiState.value.isError
                 )
                 MyBankPasswordTextField(
-                    password = "",
-                    onPasswordChange = {
-
-                    }
+                    password = uiState.value.password,
+                    onPasswordChange = { onEvents(RegisterEvents.OnPasswordTextChange(it))},
+                    isError = uiState.value.isError
                 )
 
                 MyBankCustomButton(
                     onClick = {
-                        /*TODO*/
+                        onEvents(RegisterEvents.OnRegisterClick)
                     },
                     text = "Register",
                     modifier = Modifier.padding(top = 40.dp)
@@ -107,16 +113,4 @@ private fun RegisterScreenChild(
 
 
     }
-}
-
-
-@Preview
-@Composable
-private fun RegisterScreenPrev() {
-    RegisterScreenChild(
-        onNameTextChange = {
-
-        },
-        navToLoginScreen = {}
-    )
 }

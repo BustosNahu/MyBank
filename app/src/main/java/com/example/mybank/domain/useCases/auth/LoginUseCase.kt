@@ -4,8 +4,7 @@ import androidx.annotation.Nullable
 import com.example.mybank.domain.repository.auth.AuthRepository
 import javax.inject.Inject
 
-class LoginUseCase
-@Inject constructor(
+class LoginUseCase @Inject constructor(
     private val validateEmail: ValidateEmail,
     private val validatePassword: ValidatePassword,
     private val authRepository: AuthRepository

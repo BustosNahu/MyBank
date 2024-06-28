@@ -5,6 +5,7 @@ import com.example.mybank.data.remote.auth.AuthNetworkDataSourceImpl
 import com.example.mybank.data.repository.auth.AuthRepositoryImpl
 import com.example.mybank.domain.repository.auth.AuthRepository
 import com.example.mybank.domain.useCases.auth.ValidateEmail
+import com.example.mybank.domain.useCases.auth.ValidateEmptyField
 import com.example.mybank.domain.useCases.auth.ValidatePassword
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -27,6 +28,12 @@ object AppModule {
     @Singleton
     fun provideValidatePassword(): ValidatePassword {
         return ValidatePassword()
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateEmptyField(): ValidateEmptyField {
+        return ValidateEmptyField()
     }
 
     @Provides

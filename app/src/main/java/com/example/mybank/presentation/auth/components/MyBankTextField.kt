@@ -21,6 +21,7 @@ fun MyBankTextField(
     label: String,
     onValueChange: (String) -> Unit,
     isError: Boolean = false,
+    supportingText: String = "Please enter a valid email address"
 ) {
     OutlinedTextField(
         value = text,
@@ -47,7 +48,7 @@ fun MyBankTextField(
         supportingText = {
             if (isError) {
                 Text(
-                    text = "Please enter a valid email address",
+                    text = supportingText,
                     color = Color.Red,
                     fontSize = 12.sp
                 )

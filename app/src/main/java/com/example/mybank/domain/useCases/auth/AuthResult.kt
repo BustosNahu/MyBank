@@ -14,5 +14,6 @@ sealed class AuthResult {
         USER_ALREADY_EXISTS,
         INCORRECT_EMAIL_OR_PASSWORD,
         UNDEFINED_ERROR,
+        EMPTY_FIELD
     }
 }
