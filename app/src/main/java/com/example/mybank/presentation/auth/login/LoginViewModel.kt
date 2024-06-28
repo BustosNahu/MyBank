@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mybank.core.base.BaseViewModel
+import com.example.mybank.domain.useCases.auth.AuthResult
 import com.example.mybank.domain.useCases.auth.LoginUseCase
 import com.example.mybank.domain.util.AppResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,21 +42,24 @@ class LoginViewModel
             val email = _state.value.email
             val password = _state.value.password
 
-            when (val result = loginUseCase.invoke(email, password)) {
-                is AppResult.Error -> {
+            val result = loginUseCase.invoke(email, password)
+            Log.d("LoginViewModel", "validateUserCredentials: $result")
+            when(result){
+                is AuthResult.Failure -> {
                     _state.update {
                         it.copy(
-                            isError = true
+                            isError = true,
                         )
                     }
-                    Log.d("LoginViewModel", "Error logging in ${result.message}")
                 }
-
-                is AppResult.Success -> {
-                    Log.d("LoginViewModel", "User logged in")
+                is AuthResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            isLoginSuccess = true
+                        )
+                    }
                 }
             }
-
 
         }
     }

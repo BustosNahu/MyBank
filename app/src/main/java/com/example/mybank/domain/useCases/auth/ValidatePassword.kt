@@ -3,15 +3,12 @@ package com.example.mybank.domain.useCases.auth
 
 class ValidatePassword  {
 
-    fun execute(password: String): LoginResult {
-        if (password.isEmpty()) return LoginResult(false, "The password can't be blank")
+    fun execute(password: String): AuthResult.Error? {
+        if (password.isEmpty()) return AuthResult.Error.EMPTY_PASSWORD
 
-        if (password.length <= 6) return LoginResult(
-            false,
-            "The password must have at least 6 characters"
-        )
+        if (password.length <= 6) return AuthResult.Error.WEAK_PASSWORD
 
-        return LoginResult(true)
+        return null
     }
 
 }

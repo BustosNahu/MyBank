@@ -3,8 +3,7 @@ package com.example.mybank.data.repository.auth
 import androidx.annotation.Nullable
 import com.example.mybank.data.remote.auth.AuthNetworkDataSourceImpl
 import com.example.mybank.domain.repository.auth.AuthRepository
-import com.example.mybank.domain.useCases.auth.LoginResult
-import com.example.mybank.domain.util.AppResult
+import com.example.mybank.domain.useCases.auth.AuthResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -12,7 +11,7 @@ import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor(
     private val authNetworkDataSourceImpl: AuthNetworkDataSourceImpl
 ): AuthRepository {
-    override suspend fun login(email: String, password: String): AppResult<Nullable> {
+    override suspend fun login(email: String, password: String): AuthResult {
         return withContext(Dispatchers.IO){
             authNetworkDataSourceImpl.login(email, password)
         }

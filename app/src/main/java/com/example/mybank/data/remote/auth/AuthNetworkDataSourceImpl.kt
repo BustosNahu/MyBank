@@ -1,31 +1,30 @@
 package com.example.mybank.data.remote.auth
 
-import android.util.Log
-import androidx.annotation.Nullable
-import com.example.mybank.domain.useCases.auth.LoginResult
-import com.example.mybank.domain.util.AppResult
+import com.example.mybank.domain.useCases.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+
 
 class AuthNetworkDataSourceImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthNetworkDataSource {
-    override suspend fun login(email: String, password: String): AppResult<Nullable> {
-        return try {
-            val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            Log.d("AuthNetworkDataSource", "${authResult.user}")
 
-            if (authResult.user != null) {
-                Log.d("AuthNetworkDataSource", "User logged in")
-                AppResult.Success(Nullable())
-            } else {
-                AppResult.Error("User not found")
-            }
-        } catch (e: Exception) {
-            AppResult.Error(e.message ?: "An error occurred")
+
+    override suspend fun login(email: String, password: String): AuthResult {
+        return try {
+            firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            AuthResult.Success
+        }catch (e: FirebaseAuthInvalidCredentialsException){
+            AuthResult.Failure(AuthResult.Error.INCORRECT_EMAIL_OR_PASSWORD)
+        }catch (e: Exception){
+            AuthResult.Failure(AuthResult.Error.UNDEFINED_ERROR)
         }
     }
+
+
+
 
     override suspend fun register(
         name: String,
@@ -33,8 +32,8 @@ class AuthNetworkDataSourceImpl @Inject constructor(
         email: String,
         password: String,
         picture: String
-    ): LoginResult {
-        return LoginResult(successful = true)
+    ) : AuthResult  {
+        return AuthResult.Success
     }
 
 

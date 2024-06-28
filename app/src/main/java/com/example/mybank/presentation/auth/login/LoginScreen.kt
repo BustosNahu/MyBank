@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -52,6 +53,13 @@ fun LoginScreen(
         navToRegisterScreen = {
             navController.navigate(ScreenRoutes.RegisterScreen.route)
         },
+        navToHomeScreen = {
+            navController.navigate(ScreenRoutes.HomeScreen.route){
+                popUpTo(ScreenRoutes.LoginScreen.route) {
+                    inclusive = true
+                }
+            }
+        },
         onEmailTextChange = viewModel::onEmailTextChange,
         onPasswordTextChange = viewModel::onPasswordTextChange,
         onLoginClick = viewModel::validateUserCredentials
@@ -67,9 +75,12 @@ private fun LoginScreenChild(
     onEmailTextChange: (String) -> Unit,
     onPasswordTextChange: (String) -> Unit,
     navToRegisterScreen: () -> Unit,
+    navToHomeScreen: () -> Unit,
     onLoginClick: () -> Unit
 ) {
-
+    LaunchedEffect(uiState.value.isLoginSuccess) {
+        if(uiState.value.isLoginSuccess) navToHomeScreen()
+    }
 
     Box(
         modifier = Modifier

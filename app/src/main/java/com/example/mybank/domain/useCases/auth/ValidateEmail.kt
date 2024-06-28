@@ -3,15 +3,12 @@ package com.example.mybank.domain.useCases.auth
 
 class ValidateEmail  {
 
-    fun execute(email: String): LoginResult {
-        if (email.isEmpty()) return LoginResult(false, "The email can't be blank")
+    fun execute(email: String): AuthResult.Error? {
+        if (email.isEmpty()) return AuthResult.Error.EMPTY_EMAIL
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) return LoginResult(
-            false,
-            "The email is not valid"
-        )
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) return AuthResult.Error.INVALID_EMAIL
 
-        return LoginResult(true)
+        return null
     }
 
 }
