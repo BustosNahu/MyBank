@@ -1,9 +1,7 @@
-package com.example.mybank.core.ui
+package com.example.mybank.core.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
@@ -20,20 +18,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.mybank.R
-import com.example.mybank.core.ui.components.MyBankCustomButton
 
 @Composable
 fun MyBankSuccessScreen(
     modifier: Modifier = Modifier,
     onContinueClick: () -> Unit,
     title: String = "Congratulations! Your account has been created successfully!",
+    buttonTitle: String = "Finish",
     isVisible: Boolean,
 ) {
 
@@ -82,7 +79,7 @@ fun MyBankSuccessScreen(
                 onClick = {
                     onContinueClick()
                 },
-                text = "Continue",
+                text = buttonTitle,
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 120.dp)

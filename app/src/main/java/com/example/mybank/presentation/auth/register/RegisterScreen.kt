@@ -32,7 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.mybank.R
 import com.example.mybank.core.navigation.ScreenRoutes
-import com.example.mybank.core.ui.MyBankSuccessScreen
+import com.example.mybank.core.ui.components.MyBankSuccessScreen
 import com.example.mybank.core.ui.components.MyBankCustomButton
 import com.example.mybank.core.ui.components.MyBankTopBar
 import com.example.mybank.core.util.FunctionUtils.createTempPictureUri

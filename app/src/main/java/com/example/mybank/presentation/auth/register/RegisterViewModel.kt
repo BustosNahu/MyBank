@@ -3,6 +3,7 @@ package com.example.mybank.presentation.auth.register
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.mybank.core.base.BaseViewModel
+import com.example.mybank.domain.model.User
 import com.example.mybank.domain.repository.auth.AuthRepository
 import com.example.mybank.domain.useCases.auth.AuthResult
 import com.example.mybank.domain.useCases.auth.RegisterUseCase
@@ -38,11 +39,13 @@ class RegisterViewModel @Inject constructor(
         }
         viewModelScope.launch {
             val result = authRepository.register(
-                state.value.name,
-                state.value.surname,
-                state.value.email,
-                state.value.password,
-                "tempPhotoUri"
+                User(
+                    name = state.value.name,
+                    surname = state.value.surname,
+                    email = state.value.email,
+                    password = state.value.password,
+                    listOfMovements = state.value.movements
+                )
             )
             when (result) {
                 is AuthResult.Failure -> {

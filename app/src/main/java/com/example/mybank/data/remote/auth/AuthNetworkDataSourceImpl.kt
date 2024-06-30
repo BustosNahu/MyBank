@@ -1,5 +1,6 @@
 package com.example.mybank.data.remote.auth
 
+import com.example.mybank.data.remote.dto.UserDto
 import com.example.mybank.domain.useCases.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -15,9 +16,13 @@ class AuthNetworkDataSourceImpl @Inject constructor(
 ) : AuthNetworkDataSource {
 
 
-    override suspend fun login(email: String, password: String): AuthResult {
+    override suspend fun login(userDto: UserDto): AuthResult {
         return try {
-            firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            userDto.password?.let {
+                firebaseAuth.signInWithEmailAndPassword(userDto.email,
+                    it
+                ).await()
+            }
             AuthResult.Success
         } catch (e: FirebaseAuthInvalidCredentialsException) {
             AuthResult.Failure(AuthResult.Error.INCORRECT_EMAIL_OR_PASSWORD)
@@ -28,24 +33,18 @@ class AuthNetworkDataSourceImpl @Inject constructor(
 
 
     override suspend fun register(
-        name: String,
-        surname: String,
-        email: String,
-        password: String,
-        picture: String
+        userDto: UserDto
     ): AuthResult {
         return try {
-            val userData = hashMapOf(
-                "name" to name,
-                "surname" to surname,
-                "email" to email,
-//                "picture" to picture TODO("Add picture to user")
-            )
-            firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+            userDto.password?.let {
+                firebaseAuth.createUserWithEmailAndPassword(userDto.email,
+                    it
+                ).await()
+            }
             val uid = firebaseAuth.currentUser?.uid ?: throw Exception("User UID is null")
             db.collection("users")
                 .document(uid)
-                .set(userData)
+                .set(userDto)
                 .await()
             AuthResult.Success
         } catch (e: FirebaseAuthUserCollisionException) {

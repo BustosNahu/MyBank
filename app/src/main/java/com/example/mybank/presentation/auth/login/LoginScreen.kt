@@ -138,6 +138,7 @@ private fun LoginScreenChild(
                     onLoginClick()
                 },
                 text = "Login",
+                isLoading = uiState.value.isLoading
             )
             Spacer(modifier = Modifier.height(10.dp))
             Row(

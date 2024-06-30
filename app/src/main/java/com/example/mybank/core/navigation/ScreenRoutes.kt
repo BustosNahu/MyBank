@@ -7,6 +7,6 @@ sealed class ScreenRoutes(val route: String) {
 
     //Home
     object HomeScreen: ScreenRoutes("home_screen")
-    object MovementScreen: ScreenRoutes("movement_screen")
+    object MovementDetailScreen: ScreenRoutes("movement_screen")
 
 }

@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import com.example.mybank.core.navigation.ScreenRoutes
 import com.example.mybank.presentation.auth.login.LoginScreen
 import com.example.mybank.presentation.auth.register.RegisterScreen
+import com.example.mybank.presentation.main.details.MovementDetailScreen
 import com.example.mybank.presentation.main.home.HomeScreen
 
 @Composable
@@ -36,13 +37,13 @@ fun NavGraph(navController: NavHostController) {
         composable(route = ScreenRoutes.RegisterScreen.route){
             RegisterScreen(navController = navController)
         }
-
         // Home
         composable(route = ScreenRoutes.HomeScreen.route){
             HomeScreen(navController = navController)
         }
-        composable(route = ScreenRoutes.MovementScreen.route){
-//            MovementScreen(navController = navController)
+        //Movement
+        composable(route = ScreenRoutes.MovementDetailScreen.route){
+            MovementDetailScreen(navController = navController)
         }
     }
 }

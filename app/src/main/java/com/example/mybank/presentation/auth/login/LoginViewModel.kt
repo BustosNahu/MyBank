@@ -39,6 +39,11 @@ class LoginViewModel
 
     fun validateUserCredentials() {
         viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    isLoading = true
+                )
+            }
             val email = _state.value.email
             val password = _state.value.password
 
@@ -49,13 +54,16 @@ class LoginViewModel
                     _state.update {
                         it.copy(
                             isError = true,
+                            isLoading = false
                         )
                     }
                 }
                 is AuthResult.Success -> {
                     _state.update {
                         it.copy(
-                            isLoginSuccess = true
+                            isLoginSuccess = true,
+                            isLoading = false
+
                         )
                     }
                 }

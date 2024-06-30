@@ -1,78 +1,71 @@
-package com.example.mybank.presentation.auth.register
+package com.example.mybank.data.remote.dto
 
-import com.example.mybank.domain.model.Movement
+import com.example.mybank.domain.model.User
 
-data class RegisterUiState(
-    val isError: Boolean = false,
-    val isRegisterSuccess: Boolean = false,
-    val isLoading: Boolean = false,
 
-    //Form
+data class UserDto(
     val name: String = "",
     val surname: String = "",
     val email: String = "",
-    val password: String = "",
-    val isCameraLaunch: Boolean = false,
-
-    //test
-    val movements: List<Movement> = listOf(
-        Movement(
+    val password: String? = null,
+    val listOfMovements: List<MovementDto> = listOf(
+        MovementDto(
             id = 2,
             amount = 50.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Uber ride"
         ),
-        Movement(
+        MovementDto(
             id = 1,
             amount = 100.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Salary deposit"
         ),
-        Movement(
+        MovementDto(
             id = 2,
             amount = 50.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Uber ride"
         ),
-        Movement(
+        MovementDto(
             id = 1,
             amount = 100.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Salary deposit"
         ),
-        Movement(
+        MovementDto(
             id = 2,
             amount = 50.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Uber ride"
         ),
-        Movement(
+        MovementDto(
             id = 1,
             amount = 100.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Salary deposit"
         ),
-        Movement(
+        MovementDto(
             id = 2,
             amount = 50.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Uber ride"
         ),
-        Movement(
+        MovementDto(
             id = 2,
             amount = 50.0,
             typeOfMovement = "Transfer",
             date = "2024-06-30",
             description = "Uber ride"
         ),
-        Movement(
+        MovementDto(
             id = 1,
             amount = 1000.0,
             typeOfMovement = "Transfer",
@@ -80,4 +73,14 @@ data class RegisterUiState(
             description = "Salary deposit"
         ),
     )
-)
+) {
+    fun toModel(): User =
+        User(
+            name = name,
+            surname = surname,
+            email = email,
+            password = password ?: "",
+            listOfMovements = listOfMovements.map { it.toModel() }
+        )
+
+}

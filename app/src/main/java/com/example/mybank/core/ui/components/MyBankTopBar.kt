@@ -1,5 +1,7 @@
 package com.example.mybank.core.ui.components
 
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,11 +26,13 @@ fun MyBankTopBar(
     modifier: Modifier = Modifier,
     title: String = "",
     onLeftIconClick: () -> Unit,
+    leftIcon: Int = R.drawable.baseline_arrow_back_24
     ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(45.dp)
+            .height(55.dp)
+            .background(Color.White)
     ) {
         IconButton(
             onClick = {
@@ -39,7 +43,7 @@ fun MyBankTopBar(
                 .padding(start = 16.dp, top = 16.dp),
          ) {
             Icon(
-                painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                painter = painterResource(id = leftIcon),
                 contentDescription = "Arrow back",
 
                 )

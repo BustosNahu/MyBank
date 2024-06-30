@@ -7,7 +7,6 @@ class RegisterUseCase @Inject constructor(
     private val validateEmail: ValidateEmail,
     private val validatePassword: ValidatePassword,
     private val validateEmptyField: ValidateEmptyField,
-    private val authRepository: AuthRepository
 ) {
     suspend fun invoke (name: String, surname: String, email: String, password: String): AuthResult {
         validateEmptyField.execute(name)?.let { error ->
@@ -25,7 +24,6 @@ class RegisterUseCase @Inject constructor(
             return AuthResult.Failure(error)
         }
 
-//        return authRepository.login(email, password)
         return AuthResult.Success
     }
 }

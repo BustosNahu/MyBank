@@ -7,6 +7,6 @@ data class LoginUiState (
     val isLoginSuccess: Boolean = false,
 
     //Form
-    val email: String = "",
-    val password: String = "",
+    val email: String = "nbustos.alexander@gmail.com",
+    val password: String = "12345678",
 )
