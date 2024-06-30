@@ -23,8 +23,10 @@ class AuthRepositoryImpl @Inject constructor(
         email: String,
         password: String,
         picture: String
-    ) {
-//        TODO("Not yet implemented")
+    ) : AuthResult{
+        return withContext(Dispatchers.IO){
+            authNetworkDataSourceImpl.register(name, surname, email, password, picture)
+        }
     }
 
 }

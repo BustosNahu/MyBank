@@ -5,6 +5,8 @@ sealed interface RegisterEvents {
     data class OnSurnameTextChange(val surname: String) : RegisterEvents
     data class OnPasswordTextChange(val password: String) : RegisterEvents
     data class OnEmailTextChange(val email: String) : RegisterEvents
+    data class OnSavePicAndRegisterUser(val data: String) : RegisterEvents
 
-    data object OnRegisterClick : RegisterEvents
+
+    data object ContinueWithRegistration : RegisterEvents
 }

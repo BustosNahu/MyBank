@@ -60,6 +60,8 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-auth")
     implementation ("com.google.firebase:firebase-storage")
+    implementation ("com.google.firebase:firebase-firestore-ktx:23.0.3")
+
 
     //Dependency Injection Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.48")
@@ -67,8 +69,17 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose.android)
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
-
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    //CameraX
+    implementation ("androidx.camera:camera-core:1.3.4")
+    implementation ("androidx.camera:camera-camera2:1.3.4")
+    implementation ("androidx.camera:camera-view:1.3.4")
+    implementation ("androidx.camera:camera-lifecycle:1.3.4")
+    implementation("androidx.camera:camera-extensions:1.3.4")
+
+    //Lottie animation
+    implementation("com.airbnb.android:lottie-compose:4.0.0")
 
 
     implementation(libs.androidx.core.ktx)
