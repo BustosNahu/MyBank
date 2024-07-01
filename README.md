@@ -49,7 +49,7 @@ View all about yor movements that you made. 💳
 
    
 
-## Video Recordings
+## Video Recordings (Click and see them)
 Login to MyBank with user (this has complete data of cards and movements):
 - email: nbustos.alexander@gmail.com
 - password: testing1234
