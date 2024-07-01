@@ -18,6 +18,7 @@ import com.example.mybank.domain.useCases.auth.ValidateEmptyField
 import com.example.mybank.domain.useCases.auth.ValidatePassword
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,9 +59,10 @@ object AppModule {
     @Singleton
     fun provideAuthNetworkDataSource(
         firebaseAuth: FirebaseAuth,
-        firestore: FirebaseFirestore
+        firestore: FirebaseFirestore,
+        firebaseStorage: FirebaseStorage
     ): AuthNetworkDataSource {
-        return AuthNetworkDataSourceImpl(firebaseAuth, firestore)
+        return AuthNetworkDataSourceImpl(firebaseAuth, firestore, firebaseStorage)
     }
 
     @Provides

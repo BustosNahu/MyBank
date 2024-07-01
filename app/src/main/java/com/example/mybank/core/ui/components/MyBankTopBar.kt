@@ -31,7 +31,8 @@ fun MyBankTopBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(55.dp)
+            .height(75.dp)
+            .padding(top = 16.dp )
             .background(Color.White)
     ) {
         IconButton(

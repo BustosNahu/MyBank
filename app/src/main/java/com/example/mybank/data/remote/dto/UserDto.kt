@@ -8,6 +8,8 @@ data class UserDto(
     val surname: String = "",
     val email: String = "",
     val password: String? = null,
+    val photoId: String = "",
+    val card: DebitCardDto = DebitCardDto(),
     val listOfMovements: List<MovementDto> = listOf(
         MovementDto(
             id = 2,
@@ -72,7 +74,7 @@ data class UserDto(
             date = "2024-06-30",
             description = "Salary deposit"
         ),
-    )
+    ),
 ) {
     fun toModel(): User =
         User(
@@ -80,6 +82,8 @@ data class UserDto(
             surname = surname,
             email = email,
             password = password ?: "",
+            photoId = photoId,
+            debitCard = card.toModel(),
             listOfMovements = listOfMovements.map { it.toModel() }
         )
 

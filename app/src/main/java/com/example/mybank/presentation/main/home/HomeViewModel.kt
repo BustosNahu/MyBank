@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mybank.core.base.BaseViewModel
 import com.example.mybank.domain.model.Movement
+import com.example.mybank.domain.repository.auth.AuthRepository
 import com.example.mybank.domain.repository.movements.MovementsRepository
 import com.example.mybank.domain.repository.user.UserRepository
 import com.example.mybank.domain.util.AppResult
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val movementsRepository: MovementsRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val authRepository: AuthRepository
 ): BaseViewModel<HomeUiState>(){
 
     init {
@@ -61,14 +63,35 @@ class HomeViewModel @Inject constructor(
         when(event){
             is HomeEvents.OnMovementClicked -> saveMovementToLocalState(event.movement)
             HomeEvents.ClearState -> resetNavigationState()
+            HomeEvents.OnLogout -> logoutUser()
         }
 
+    }
+
+    private fun logoutUser() {
+        viewModelScope.launch {
+            when (authRepository.logout()) {
+                is AppResult.Error -> {
+                    Log.d("HomeViewModel", "Error logging out user")
+                }
+
+                is AppResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            isUserLoggedOut = true
+                        )
+
+                    }
+                }
+            }
+        }
     }
 
     private fun resetNavigationState() {
         _state.update {
             it.copy(
-                isSelectedMovementIdSaved = false
+                isSelectedMovementIdSaved = false,
+                isUserLoggedOut = false
             )
         }
     }

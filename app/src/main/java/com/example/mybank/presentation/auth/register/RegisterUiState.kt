@@ -13,71 +13,7 @@ data class RegisterUiState(
     val email: String = "",
     val password: String = "",
     val isCameraLaunch: Boolean = false,
+    val photoIdUrl: String = "",
 
-    //test
-    val movements: List<Movement> = listOf(
-        Movement(
-            id = 2,
-            amount = 50.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Uber ride"
-        ),
-        Movement(
-            id = 1,
-            amount = 100.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Salary deposit"
-        ),
-        Movement(
-            id = 2,
-            amount = 50.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Uber ride"
-        ),
-        Movement(
-            id = 1,
-            amount = 100.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Salary deposit"
-        ),
-        Movement(
-            id = 2,
-            amount = 50.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Uber ride"
-        ),
-        Movement(
-            id = 1,
-            amount = 100.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Salary deposit"
-        ),
-        Movement(
-            id = 2,
-            amount = 50.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Uber ride"
-        ),
-        Movement(
-            id = 2,
-            amount = 50.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Uber ride"
-        ),
-        Movement(
-            id = 1,
-            amount = 1000.0,
-            typeOfMovement = "Transfer",
-            date = "2024-06-30",
-            description = "Salary deposit"
-        ),
-    )
+    val stepTwoOfRegistration: Boolean = false,
 )

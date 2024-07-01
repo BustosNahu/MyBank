@@ -24,11 +24,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mybank.R
+import com.example.mybank.domain.model.User
 
 @Composable
 fun TopAccountData(
     modifier: Modifier = Modifier,
-    userName: String,
+    user: User,
 ) {
     Box(modifier = modifier) {
         Box(
@@ -38,10 +39,10 @@ fun TopAccountData(
                 .height(200.dp),
         ) {
             Column(
-                Modifier.padding(16.dp)
+                Modifier.padding(28.dp)
             ) {
                 Text(
-                    text = "Hello $userName!",
+                    text = "Hello ${user.name}!",
                     fontSize = 20.sp,
                     color = Color.White,
                     fontFamily = FontFamily(Font(R.font.inter_semi_bold))
@@ -71,7 +72,10 @@ fun TopAccountData(
 
             }
         }
-        DebitCard(modifier = Modifier.padding(top = 100.dp))
+        DebitCard(
+            modifier = Modifier.padding(top = 100.dp),
+            card = user.debitCard
+        )
 
     }
 

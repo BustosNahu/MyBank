@@ -53,7 +53,8 @@ fun MyBankTextField(
                     fontSize = 12.sp
                 )
             }
-        }
+        },
+        singleLine = true,
     )
 
 }

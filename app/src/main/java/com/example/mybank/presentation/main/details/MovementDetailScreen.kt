@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -18,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -66,22 +69,25 @@ fun MovementDetailScreenChild(
         Column(
             Modifier
                 .fillMaxSize()
-                .padding(top = 55.dp)
+                .padding(top = 75.dp)
         ) {
             Column(
                 Modifier
-                    .background(Color(0XFF356C84))
+                    .background(
+                        Color(0XFF356C84),
+                        shape = RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp)
+                    )
                     .height(200.dp)
                     .padding(16.dp)
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Transfer NRO: ${uiState.value.movement?.id}",
+                    text = "Transfer NRO: #${uiState.value.movement?.id}",
                     color = Color.White,
                     fontSize = 18.sp,
                 )
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(30.dp))
                 Text(
                     text = "$${uiState.value.movement?.amount}",
                     color = Color.White,
@@ -118,6 +124,7 @@ fun MovementDetailScreenChild(
                 verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp)
             ) {
                 Spacer(modifier = Modifier.height(40.dp))
+                Divider()
                 Text(
                     text = "Type of Movement:",
                     fontSize = 16.sp,
@@ -128,7 +135,7 @@ fun MovementDetailScreenChild(
                     fontSize = 16.sp,
                     fontFamily = FontFamily(Font(R.font.inter_medium))
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                Divider()
                 Text(
                     text = "Sent by:",
                     fontSize = 16.sp,
@@ -139,7 +146,7 @@ fun MovementDetailScreenChild(
                     fontSize = 16.sp,
                     fontFamily = FontFamily(Font(R.font.inter_medium))
                 )
-                Spacer(modifier = Modifier.height(10.dp))
+                Divider()
                 Text(
                     text = "Bank:",
                     fontSize = 16.sp,
@@ -150,6 +157,8 @@ fun MovementDetailScreenChild(
                     fontSize = 16.sp,
                     fontFamily = FontFamily(Font(R.font.inter_medium))
                 )
+                Divider()
+
 
             }
 

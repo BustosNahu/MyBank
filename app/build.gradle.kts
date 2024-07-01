@@ -31,6 +31,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -79,7 +80,7 @@ dependencies {
     implementation("androidx.camera:camera-extensions:1.3.4")
 
     //Lottie animation
-    implementation("com.airbnb.android:lottie-compose:4.0.0")
+    implementation("com.airbnb.android:lottie-compose:6.0.1")
 
     //Room
     implementation("androidx.room:room-runtime:2.6.1")

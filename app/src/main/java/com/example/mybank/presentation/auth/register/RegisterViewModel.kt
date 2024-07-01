@@ -1,5 +1,6 @@
 package com.example.mybank.presentation.auth.register
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.mybank.core.base.BaseViewModel
@@ -7,8 +8,8 @@ import com.example.mybank.domain.model.User
 import com.example.mybank.domain.repository.auth.AuthRepository
 import com.example.mybank.domain.useCases.auth.AuthResult
 import com.example.mybank.domain.useCases.auth.RegisterUseCase
+import com.example.mybank.domain.util.AppResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,8 +26,41 @@ class RegisterViewModel @Inject constructor(
             is RegisterEvents.OnNameTextChange -> updateNameState(registerEvents.name)
             is RegisterEvents.OnPasswordTextChange -> updatePasswordState(registerEvents.password)
             is RegisterEvents.OnSurnameTextChange -> updateSurnameState(registerEvents.surname)
-            RegisterEvents.ContinueWithRegistration -> checkToContinueWithRegistration()
-            is RegisterEvents.OnSavePicAndRegisterUser -> registerUser()
+            RegisterEvents.ContinueWithRegistration -> checkToContinueWithRegistrationStep1()
+            is RegisterEvents.OnSavePicAndRegisterUser -> uploadIdPhoto(registerEvents.uri)
+            RegisterEvents.ContinueWithRegistrationStep2 -> cameraLaunch()
+        }
+    }
+
+    private fun cameraLaunch() {
+        _state.update {
+            it.copy(
+                isCameraLaunch = true,
+                stepTwoOfRegistration = false
+            )
+        }
+    }
+
+    private fun uploadIdPhoto(photoIdUrl: Uri) {
+        viewModelScope.launch {
+            when (val result = authRepository.uploadIdPhoto(photoIdUrl)) {
+                is AppResult.Error -> {
+                    Log.d("RegisterViewModel", "Error")
+                }
+
+                is AppResult.Success -> {
+                    Log.d("RegisterViewModel PH", result.data)
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            isRegisterSuccess = true,
+                            photoIdUrl = result.data
+                        )
+                    }
+                    registerUser()
+                }
+            }
+
         }
     }
 
@@ -44,7 +78,7 @@ class RegisterViewModel @Inject constructor(
                     surname = state.value.surname,
                     email = state.value.email,
                     password = state.value.password,
-                    listOfMovements = state.value.movements
+                    photoId = state.value.photoIdUrl,
                 )
             )
             when (result) {
@@ -65,7 +99,7 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    private fun checkToContinueWithRegistration() {
+    private fun checkToContinueWithRegistrationStep1() {
         viewModelScope.launch {
             val result = registerUseCase.invoke(
                 state.value.name,
@@ -83,8 +117,8 @@ class RegisterViewModel @Inject constructor(
                 is AuthResult.Success -> {
                     _state.update {
                         it.copy(
-                            isCameraLaunch = true,
-                            isLoading = true
+                            isLoading = true,
+                            stepTwoOfRegistration = true,
                         )
                     }
                 }

@@ -27,12 +27,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mybank.R
+import com.example.mybank.domain.model.DebitCard
 
 @Composable
 fun DebitCard(
     modifier: Modifier = Modifier,
-
-
+    card: DebitCard
     ) {
     Card(
         modifier = modifier
@@ -78,7 +78,7 @@ fun DebitCard(
                     fontSize = 16.sp
                 )
                 Text(
-                    text = "24,656.56",
+                    text = "${card.balance}",
                     color = Color.White,
                     fontFamily = FontFamily(Font(R.font.inter_semi_bold)),
                     fontSize = 26.sp,
@@ -87,14 +87,14 @@ fun DebitCard(
             }
             Spacer(modifier = Modifier.height(25.dp))
             Row {
-                Text(text = "...3745",
+                Text(text = "...${card.cardNumber.takeLast(4)}",
                     color = Color.White,
                     fontFamily = FontFamily(Font(R.font.inter_semi_bold)),
                     fontSize = 16.sp,
                     textAlign = TextAlign.Justify,
                     modifier = Modifier.weight(1f)
                 )
-                Text(text = "17/8",
+                Text(text = card.expirationDate,
                     color = Color.White,
                     fontFamily = FontFamily(Font(R.font.inter_semi_bold)),
                     fontSize = 16.sp,
@@ -105,16 +105,6 @@ fun DebitCard(
 
 
         }
-    }
-
-}
-
-@Preview
-@Composable
-private fun DebitCardPrev() {
-    Column {
-        Spacer(modifier = Modifier.height(300.dp))
-        DebitCard()
     }
 
 }

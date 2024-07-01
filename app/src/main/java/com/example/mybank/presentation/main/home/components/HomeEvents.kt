@@ -6,5 +6,6 @@ sealed interface HomeEvents {
 
     data class OnMovementClicked(val movement: Movement): HomeEvents
     data object ClearState: HomeEvents
+    data object OnLogout: HomeEvents
 
 }
