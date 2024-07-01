@@ -53,6 +53,7 @@ View all about yor movements that you made. 💳
 Login to MyBank with user (this has complete data of cards and movements):
 - email: nbustos.alexander@gmail.com
 - password: testing1234
+  
 [![Login to MyBank](https://firebasestorage.googleapis.com/v0/b/mybank-c6a86.appspot.com/o/Screenshot%202024-07-01%20at%2010.10.39%E2%80%AFAM.png?alt=media&token=ccdd9b5e-e27b-441a-a8c4-0e8f521fa9ea)](https://firebasestorage.googleapis.com/v0/b/mybank-c6a86.appspot.com/o/login_myBank.mp4?alt=media&token=3e8fda5b-49a7-4764-a029-a2d9f8f348f3)
 
 
