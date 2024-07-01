@@ -49,7 +49,8 @@ View all about yor movements that you made. 💳
 
    
 
-## Video Recordings (Click and see them)
+## Video Recordings (Click and see them):
+### Login
 Login to MyBank with user (this has complete data of cards and movements):
 - email: nbustos.alexander@gmail.com
 - password: testing1234
@@ -57,7 +58,7 @@ Login to MyBank with user (this has complete data of cards and movements):
 [![Login to MyBank](https://firebasestorage.googleapis.com/v0/b/mybank-c6a86.appspot.com/o/Screenshot%202024-07-01%20at%2010.10.39%E2%80%AFAM.png?alt=media&token=ccdd9b5e-e27b-441a-a8c4-0e8f521fa9ea)](https://firebasestorage.googleapis.com/v0/b/mybank-c6a86.appspot.com/o/login_myBank.mp4?alt=media&token=3e8fda5b-49a7-4764-a029-a2d9f8f348f3)
 
 
-Register to MyBank:
+### Register
 
 [![Login to MyBank](https://firebasestorage.googleapis.com/v0/b/mybank-c6a86.appspot.com/o/Screenshot%202024-07-01%20at%2010.11.48%E2%80%AFAM.png?alt=media&token=0c0d8126-a7d8-4707-a39a-531fd1246865)](https://firebasestorage.googleapis.com/v0/b/mybank-c6a86.appspot.com/o/register_myBank.mp4?alt=media&token=32e82535-2e9a-4886-a8ba-86171faff067)
 
