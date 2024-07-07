@@ -27,27 +27,3 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test
-
-      - name: Post test results to PR
-        if: always()
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const path = 'app/build/reports/tests/testDebugUnitTest/index.html';
-            if (fs.existsSync(path)) {
-              const testResult = fs.readFileSync(path, 'utf8');
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `Test Results:\n${testResult}`
-              });
-            } else {
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: 'Test results file not found.'
-              });
-            }
