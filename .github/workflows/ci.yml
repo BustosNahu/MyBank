@@ -2,9 +2,9 @@ name: MyBank build
 
 on:
   push:
-    branches: [ "development" ]
+    branches: [ "production", "development" ]
   pull_request:
-    branches: [ "development" ]
+    branches: [ "production", "development" ]
 
 jobs:
   build:
