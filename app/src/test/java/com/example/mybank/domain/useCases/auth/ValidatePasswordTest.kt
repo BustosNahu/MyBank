@@ -29,8 +29,4 @@ class ValidatePasswordTest {
         val result = validatePassword.execute(password)
         assertNull(result)
     }
-    @Test
-    fun `it's a fail test to check something of branch rules`(){
-        assert(false)
-    }
 }
