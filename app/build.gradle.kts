@@ -69,6 +69,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
@@ -95,6 +96,10 @@ dependencies {
     //jUnit
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
 
+    //Mock
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("io.mockk:mockk:1.12.4")
+
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0-RC")
     implementation(libs.androidx.core.ktx)
@@ -114,6 +119,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 kapt {
+    useBuildCache = false
     correctErrorTypes = true
+    mapDiagnosticLocations = true
 }
 

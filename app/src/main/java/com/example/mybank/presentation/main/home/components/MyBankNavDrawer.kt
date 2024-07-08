@@ -70,7 +70,7 @@ fun MyBankNavDrawer(
                 fontFamily = FontFamily(Font(R.font.inter_light))
             )
             Text(
-                text = "${user.name + " " + user.surname}",
+                text = user.name + " " + user.surname,
                 fontSize = 16.sp,
                 fontFamily = FontFamily(Font(R.font.inter_medium))
             )
@@ -81,7 +81,7 @@ fun MyBankNavDrawer(
                 fontFamily = FontFamily(Font(R.font.inter_light))
             )
             Text(
-                text = "${user.email}",
+                text = user.email,
                 fontSize = 16.sp,
                 fontFamily = FontFamily(Font(R.font.inter_medium))
             )
