@@ -1,8 +1,5 @@
 package com.example.mybank.domain.useCases.auth
 
-import org.junit.Test
-import org.junit.jupiter.api.BeforeEach
-
 
 class LoginUseCaseTest {
 
